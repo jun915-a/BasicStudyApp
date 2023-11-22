@@ -18,9 +18,9 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val naviController = findNavController()
 
-        val button = view.findViewById<Button>(R.id.test_button)
+        val button = view.findViewById<Button>(R.id.move_second_fragment_button)
         button?.setOnClickListener {
-            Timber.d("test_log ")
+            Timber.d("!!! ${this.javaClass.name} button_click")
             naviController.navigate(R.id.action_fragment1_to_fragment2)
         }
     }

@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_fragment1_to_fragment2"
             app:destination="@id/fragment2" />
-        <action
-            android:id="@+id/action_fragment2_to_fragment1"
-            app:destination="@id/fragment1" />
     </fragment>
 
     <fragment
@@ -23,5 +20,8 @@
         android:name="com.example.basicstudyapp.ui.SecondFragment"
         android:label="Fragment 2"
         tools:layout="@layout/fragment_second">
+        <action
+            android:id="@+id/action_fragment2_to_fragment1"
+            app:destination="@id/fragment1" />
     </fragment>
 </navigation>

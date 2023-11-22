@@ -32,8 +32,9 @@ class SecondFragment : Fragment() {
 
         val button = view.findViewById<Button>(R.id.test_button)
         button?.setOnClickListener {
-            Timber.d("test_log ")
-            naviController.popBackStack(R.id.fragment1,false)
+            Timber.d("!!! ${this.javaClass.name} button_click")
+//            naviController.popBackStack(R.id.fragment1,false)
+            naviController.navigate(R.id.action_fragment2_to_fragment1)
         }
     }
 
