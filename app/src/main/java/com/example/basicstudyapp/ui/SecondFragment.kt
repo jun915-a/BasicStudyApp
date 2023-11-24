@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.basicstudyapp.R
 import timber.log.Timber
 
-class SecondFragment : Fragment() {
+class SecondFragment : BaseFragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -27,6 +27,8 @@ class SecondFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        showProgress(true)
+
         super.onViewCreated(view, savedInstanceState)
         val naviController = findNavController()
 

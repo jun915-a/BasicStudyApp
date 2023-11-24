@@ -11,20 +11,23 @@ import com.example.basicstudyapp.R
 import timber.log.Timber
 
 
-class FirstFragment : Fragment() {
+class FirstFragment : BaseFragment() {
 //    private lateinit var binding: FragmentFirst
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val naviController = findNavController()
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//    }
 
-        val button = view.findViewById<Button>(R.id.move_second_fragment_button)
+    override fun afterViewCreated(){
+        val naviController = findNavController()
+        val button = view?.findViewById<Button>(R.id.move_second_fragment_button)
         button?.setOnClickListener {
             Timber.d("!!! ${this.javaClass.name} button_click")
+            showProgress(false)
             naviController.navigate(R.id.action_fragment1_to_fragment2)
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
