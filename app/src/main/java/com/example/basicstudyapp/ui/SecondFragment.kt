@@ -1,23 +1,19 @@
 package com.example.basicstudyapp.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.basicstudyapp.R
-import timber.log.Timber
+import com.example.basicstudyapp.ViewModel.MyViewModel
 
 class SecondFragment : BaseFragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val viewModel: MyViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,23 +22,21 @@ class SecondFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
+    @SuppressLint("LogNotTimber")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        showProgress(true)
 
+        viewModel.postHideProgress()
         super.onViewCreated(view, savedInstanceState)
         val naviController = findNavController()
 
         val button = view.findViewById<Button>(R.id.test_button)
         button?.setOnClickListener {
-            Timber.d("!!! ${this.javaClass.name} button_click")
+            Log.d("test_log", "${this.javaClass.name} button_click")
 //            naviController.popBackStack(R.id.fragment1,false)
             naviController.navigate(R.id.action_fragment2_to_fragment1)
         }
     }
 
-    companion object {
-        fun newInstance(param1: String, param2: String): SecondFragment {
-            return SecondFragment()
-        }
-    }
+//    companion object {
+//    }
 }
