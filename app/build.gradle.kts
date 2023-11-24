@@ -4,7 +4,9 @@ plugins {
 }
 
 android {
-
+    buildFeatures {
+        viewBinding = true
+    }
     namespace = "com.example.basicstudyapp"
     compileSdk = 33
 
@@ -34,9 +36,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    dataBinding {
-        enable
-    }
+
 }
 
 dependencies {

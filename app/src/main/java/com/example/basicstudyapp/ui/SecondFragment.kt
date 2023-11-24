@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +12,24 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.basicstudyapp.R
 import com.example.basicstudyapp.ViewModel.MyViewModel
+import com.example.basicstudyapp.databinding.FragmentSecondBinding
 
 class SecondFragment : BaseFragment() {
     private val viewModel: MyViewModel by viewModels()
+    private var _binding: FragmentSecondBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_second, container, false)
+    ): View {
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @SuppressLint("LogNotTimber")
@@ -31,28 +39,25 @@ class SecondFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val naviController = findNavController()
 
-        val backButton = view.findViewById<Button>(R.id.back_button)
-        backButton?.setOnClickListener {
+        binding.apply {
+            backButton.setOnClickListener {
 //            naviController.popBackStack(R.id.fragment1,false)
-            naviController.navigate(R.id.action_fragment2_to_fragment1)
+                naviController.navigate(R.id.action_fragment2_to_fragment1)
+            }
+
+            webViewButton.setOnClickListener {
+                naviController.navigate(R.id.action_fragment2_to_web_view)
+            }
+
+            browseButton.setOnClickListener {
+                naviController.navigate(R.id.action_fragment2_to_web_view)
+                val intent = Intent()
+                intent.action = "android.intent.action.VIEW"
+                val url = Uri.parse("https://www.google.com")
+                intent.data = url
+                activity?.startActivity(intent)
+            }
         }
-        val webViewButton = view.findViewById<Button>(R.id.web_view_button)
-        webViewButton?.setOnClickListener {
-            naviController.navigate(R.id.action_fragment2_to_web_view)
-        }
-
-        val browseButton = view.findViewById<Button>(R.id.browse_button)
-        browseButton?.setOnClickListener {
-            naviController.navigate(R.id.action_fragment2_to_web_view)
-            val intent = Intent()
-            intent.action = "android.intent.action.VIEW"
-            val url = Uri.parse("https://www.google.com")
-            intent.data = url
-
-            activity?.startActivity(intent)
-
-        }
-
     }
 
 //    companion object {

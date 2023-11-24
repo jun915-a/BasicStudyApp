@@ -32,7 +32,7 @@
         android:id="@+id/WebView"
         android:name="com.example.basicstudyapp.ui.WebViewScreen"
         android:label="WebView"
-        tools:layout="@layout/base_web_view">
+        tools:layout="@layout/screen_web_view">
 
     </fragment>
 
