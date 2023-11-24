@@ -1,6 +1,8 @@
 package com.example.basicstudyapp.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,12 +31,28 @@ class SecondFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val naviController = findNavController()
 
-        val button = view.findViewById<Button>(R.id.test_button)
-        button?.setOnClickListener {
-            Log.d("test_log", "${this.javaClass.name} button_click")
+        val backButton = view.findViewById<Button>(R.id.back_button)
+        backButton?.setOnClickListener {
 //            naviController.popBackStack(R.id.fragment1,false)
             naviController.navigate(R.id.action_fragment2_to_fragment1)
         }
+        val webViewButton = view.findViewById<Button>(R.id.web_view_button)
+        webViewButton?.setOnClickListener {
+            naviController.navigate(R.id.action_fragment2_to_web_view)
+        }
+
+        val browseButton = view.findViewById<Button>(R.id.browse_button)
+        browseButton?.setOnClickListener {
+            naviController.navigate(R.id.action_fragment2_to_web_view)
+            val intent = Intent()
+            intent.action = "android.intent.action.VIEW"
+            val url = Uri.parse("https://www.google.com")
+            intent.data = url
+
+            activity?.startActivity(intent)
+
+        }
+
     }
 
 //    companion object {

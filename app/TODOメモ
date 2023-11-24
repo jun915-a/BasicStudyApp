@@ -1,9 +1,8 @@
 ・BaseFragment作成して継承して全部のFragment継承するようにする
 　その中にprogressbar入れる
 
-・BaseWebViewFragment作って
 URLとBOOLで外部ブラウザかwebview表示か出しわけるようにする
 
 ・カメラの撮影画面保存画面の実装
 
-・Livedata
+・ボタンのデザインxmlで定義してradiusも定義

@@ -13,7 +13,10 @@ class MyViewModel : ViewModel() {
 
     //TODO:jetpack compose
 
+    // MutableLiveDataを使用して変更可能なLiveDataを作成
     private val mShowProgressBar = MutableLiveData<ProgressData>()
+
+    // 外部に公開される不変のLiveData
     val showProgressBar: LiveData<ProgressData> = mShowProgressBar
 
     fun postHideProgress() {

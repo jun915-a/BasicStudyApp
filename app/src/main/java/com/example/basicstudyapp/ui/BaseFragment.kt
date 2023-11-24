@@ -39,7 +39,7 @@ open class BaseFragment : Fragment() {
                 }
                 Handler(Looper.getMainLooper()).postDelayed({
                     progressDialog?.dismiss()
-                }, 3000)
+                }, 1000)
             }
         }
     }

@@ -22,7 +22,7 @@ class FirstFragment : BaseFragment() {
 
     override fun afterViewCreated() {
         val naviController = findNavController()
-        val button = view?.findViewById<Button>(R.id.move_second_fragment_button)
+        val button = view?.findViewById<Button>(R.id.next_button)
         button?.setOnClickListener {
             showProgress()
             viewModel.postShowProgress()
