@@ -51,4 +51,5 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("com.jakewharton.timber:timber:4.7.1")
+//    implementation ("com.android.support:appcompat-v7:28.0.0")
 }
