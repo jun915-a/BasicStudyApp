@@ -21,6 +21,10 @@ import com.example.basicstudyapp.ViewModel.MyViewModel
 import com.example.basicstudyapp.adapter.ButtonPattern
 import com.example.basicstudyapp.adapter.MenuButtonAdapter
 import com.example.basicstudyapp.databinding.FragmentSecondBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SecondFragment : BaseFragment() {
     private val viewModel: MyViewModel by viewModels()
@@ -43,8 +47,6 @@ class SecondFragment : BaseFragment() {
 
     @SuppressLint("LogNotTimber")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        viewModel.postHideProgress()
         super.onViewCreated(view, savedInstanceState)
         val naviController = findNavController()
 
@@ -120,4 +122,5 @@ class SecondFragment : BaseFragment() {
         intent.data = url
         activity?.startActivity(intent)
     }
+
 }

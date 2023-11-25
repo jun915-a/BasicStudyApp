@@ -1,40 +1,47 @@
 package com.example.basicstudyapp.ViewModel
 
+import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.Context
 import android.graphics.Bitmap
-import android.widget.ImageView
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.basicstudyapp.ProgressData
+import com.example.basicstudyapp.R
 
 class MyViewModel : ViewModel() {
-    //TODO:ライブデータ
-    //mutableLiveData<List<T>>
 
     //TODO: モーションレイアウト
-
-    //TODO:jetpack compose
+    var progressDialog: Dialog? = null
 
     // MutableLiveDataを使用して変更可能なLiveDataを作成
-    private val mShowProgressBar = MutableLiveData<ProgressData>()
+    private val mImageView = MutableLiveData<Bitmap>()
 
     // 外部に公開される不変のLiveData
-    val showProgressBar: LiveData<ProgressData> = mShowProgressBar
-
-    private val mImageView = MutableLiveData<Bitmap>()
     val imageView: LiveData<Bitmap> = mImageView
 
-
-
-
-    fun postHideProgress() {
-        mShowProgressBar.postValue(ProgressData(true))
-    }
-
-    fun postShowProgress() {
-        mShowProgressBar.postValue(ProgressData(false))
-    }
     fun postImageView(imageView: Bitmap) {
         mImageView.postValue(imageView)
+    }
+
+    @SuppressLint("LogNotTimber")
+    fun showProgress(context: Context) {
+        Log.d("test_log","showProgress")
+        if (progressDialog == null) {
+            progressDialog = Dialog(context)
+        }
+        progressDialog?.apply {
+            window?.setBackgroundDrawableResource(R.color.black)
+            setContentView(R.layout.dialog_progress)
+            show()
+        }
+    }
+
+    @SuppressLint("LogNotTimber")
+    fun hideProgress() {
+        Log.d("test_log","hideProgress")
+        progressDialog?.hide()
+        progressDialog?.dismiss()
     }
 }

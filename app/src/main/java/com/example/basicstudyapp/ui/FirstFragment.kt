@@ -25,8 +25,7 @@ class FirstFragment : BaseFragment() {
         val naviController = findNavController()
         binding.apply {
             nextButton.setOnClickListener {
-                showProgress()
-                viewModel.postShowProgress()
+//                viewModel.showProgress(requireContext())
                 naviController.navigate(R.id.action_fragment1_to_fragment2)
             }
         }
