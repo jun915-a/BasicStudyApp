@@ -3,10 +3,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="first_fragment_text">First画面</string>
     <string name="second_fragment_text">Portal画面</string>
-    <string name="next_button">Next Button</string>
-    <string name="back_button_text">Back Button</string>
-    <string name="web_view_button">web view Button</string>
-    <string name="browse_button">browse Button</string>
-    <string name="photo_button">photo Button</string>
+    <string name="next_button">Next</string>
+    <string name="back_button_text">Back</string>
+    <string name="web_view_button">web view</string>
+    <string name="browse_button">browse</string>
+    <string name="photo_button">photo</string>
+    <string name="map_button">map</string>
 
 </resources>

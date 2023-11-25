@@ -13,9 +13,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.basicstudyapp.R
 import com.example.basicstudyapp.ViewModel.MyViewModel
+import com.example.basicstudyapp.adapter.ButtonPattern
+import com.example.basicstudyapp.adapter.MenuButtonAdapter
 import com.example.basicstudyapp.databinding.FragmentSecondBinding
 
 class SecondFragment : BaseFragment() {
@@ -45,36 +49,54 @@ class SecondFragment : BaseFragment() {
         val naviController = findNavController()
 
         binding.apply {
-            backButton.setOnClickListener {
-//            naviController.popBackStack(R.id.fragment1,false)
-                naviController.navigate(R.id.action_fragment2_to_fragment1)
+            val items = mutableListOf<ButtonPattern>()
+            for (i in ButtonPattern.values()) {
+                items.add(i)
             }
+            val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.layoutManager = layoutManager
+            val adapter = context?.let {
+                MenuButtonAdapter(items, it) { pattern ->
+                    when (pattern) {
+                        ButtonPattern.BACK -> {
+//                          naviController.popBackStack(R.id.fragment1,false)
+                            naviController.navigate(R.id.action_fragment2_to_fragment1)
+                        }
 
-            webViewButton.setOnClickListener {
-                naviController.navigate(R.id.action_fragment2_to_web_view)
-            }
+                        ButtonPattern.WEB -> {
+                            naviController.navigate(R.id.action_fragment2_to_web_view)
+                        }
 
-            browseButton.setOnClickListener {
-                naviController.navigate(R.id.action_fragment2_to_web_view)
-                val intent = Intent()
-                intent.action = "android.intent.action.VIEW"
-                val url = Uri.parse("https://www.google.com")
-                intent.data = url
-                activity?.startActivity(intent)
-            }
-            photoButton.setOnClickListener {
-                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                try {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-                } catch (e: ActivityNotFoundException) {
-                    // display error state to the user
-                    Log.d("error_log", "$e")
+                        ButtonPattern.BROWSE -> {
+                            openBrowse(naviController)
+
+                        }
+
+                        ButtonPattern.PHOTO -> {
+                            startPhoto()
+                        }
+
+                        ButtonPattern.MAP -> {
+//                            holder.button.text = context.getText(R.string.map_button)
+                        }
+                    }
                 }
             }
+            recyclerView.adapter = adapter
         }
         viewModel.imageView.observe(viewLifecycleOwner) {
             binding.imageView.setImageBitmap(it)
+        }
+    }
 
+    @SuppressLint("LogNotTimber")
+    private fun startPhoto() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        } catch (e: ActivityNotFoundException) {
+            // display error state to the user
+            Log.d("error_log", "$e")
         }
     }
 
@@ -88,6 +110,14 @@ class SecondFragment : BaseFragment() {
         }
     }
 
-//    companion object {
+    //    companion object {
 //    }
+    private fun openBrowse(naviController: NavController) {
+        naviController.navigate(R.id.action_fragment2_to_web_view)
+        val intent = Intent()
+        intent.action = "android.intent.action.VIEW"
+        val url = Uri.parse("https://www.google.com")
+        intent.data = url
+        activity?.startActivity(intent)
+    }
 }
